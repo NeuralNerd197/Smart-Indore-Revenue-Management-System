@@ -1,7 +1,73 @@
-![image](https://github.com/user-attachments/assets/59f1f2ef-56e5-48b8-aefd-d4e81e7fe7fd)
+# SIRMS (Smart Indore Revenue Management System): Add New User
 
-# Smart-Indore-Revenue-Management-System
-The Smart Indore Revenue Management System (SIRMS) is an AI-driven, cloud-based unified taxation platform designed to streamline municipal revenue collection through a centralized interface. This system enables taxpayers to seamlessly file multiple tax categories, including property tax, water tax, and other municipal levies, via a single portal, eliminating the inefficiencies of segregated tax submission mechanisms.
+## Route Description
 
-SIRMS integrates state-of-the-art machine learning (ML), artificial intelligence (AI), and blockchain-based verification to ensure accuracy, transparency, and security in tax calculations and payments. Additionally, an advanced multilingual AI chatbot provides real-time assistance, allowing users to query tax regulations, payment procedures, and compliance requirements directly from the authorities.
+The `/newUser` route allows you to add a new user to the Swastimuni app. Users can provide their personal details, including name, phone number, address, and other relevant information.
 
+## Route Details
+
+- **Endpoint**: `POST /api/v1/newUser`
+- **Purpose**: Create a new user profile
+- **Expected Input**:
+  - Request Body (JSON format):
+    ```json
+    {
+        "fullName": "John Doe",
+        "phoneNumber": "1234567890",
+        "aadharCard": "1234567890123456",
+        "countryCode": 1,
+        "address": {
+            "zoneNumber": 5,
+            "wardNumber": 10,
+            "colonyName": "Green Valley",
+            "Address": "123 Main Street"
+        }
+    }
+    ```
+    - `fullName`: Full name of the user (required)
+    - `phoneNumber`: User's phone number (10 digits)
+    - `aadharCard`: User's Aadhar card number (16 digits)
+    - `countryCode`: Numeric country code (e.g., 1 for USA)
+    - `address`: User's address details (including zone, ward, colony, and street address)
+
+- **Response** (if successful):
+  ```json
+  {
+      "message": "New user created successfully!",
+      "userId": "your-user-id-here"
+  }
+  ```
+  - `userId`: Unique identifier assigned to the newly created user
+
+- **Error Handling**:
+  - If any validation errors occur (e.g., missing required fields), an appropriate error response will be sent with a status code of 500.
+
+## Example Usage
+
+1. **Request**:
+   - Method: POST
+   - URL: `http://localhost:3000/api/v1/newUser`
+   - Headers: `Content-Type: application/json`
+   - Body:
+     ```json
+     {
+         "fullName": "Jane Smith",
+         "phoneNumber": "9876543210",
+         "aadharCard": "9876543210123456",
+         "countryCode": 91,
+         "address": {
+             "zoneNumber": 3,
+             "wardNumber": 7,
+             "colonyName": "Rose Gardens",
+             "Address": "456 Elm Street"
+         }
+     }
+     ```
+
+2. **Response**:
+   ```json
+   {
+       "message": "New user created successfully!",
+       "userId": "609d8a1f8c9a4c001f3e7b1a"
+   }
+   ```
